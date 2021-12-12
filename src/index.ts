@@ -1,4 +1,4 @@
-//! DONT REMOVE THIS LINE
+//DONT REMOVE THIS LINE
 console.log('Try npm run lint/fix!');
 
-//TODO: Please make general request
+//Please make general request
