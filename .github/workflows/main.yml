@@ -15,11 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
       - name: Clean the project cache
         run: npm run clean
-      - name: Lint the project
-        run: npm run lint
-      - name: Fix the project
-        run: npm run fix
       - name: Compile the project
         run: npm run compile 
