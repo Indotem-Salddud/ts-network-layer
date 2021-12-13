@@ -22,4 +22,4 @@ class RootFactory {
     }
 }
 
-RootFactory.home()
+// RootFactory.home()
