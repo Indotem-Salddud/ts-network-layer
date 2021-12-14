@@ -27,13 +27,13 @@ enum HTTPMethods {
   interface APIRequest {
     method?: HTTPMethods;
     headers?: RequesHeaders;
-    body?: BodyInit;
+    body?: string;
   }
   
   interface ResponseCache {
     cacheable: boolean;
     maxAge?: number;
-    body?: BodyInit;
+    body?: string;
     update(callbacks: APICallbacks): void;
   }
   
