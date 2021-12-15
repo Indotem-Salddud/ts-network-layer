@@ -29,19 +29,19 @@ enum RequestModes {
   interface RequesHeaders {
     //TODO
   }
+
+  interface ResponseCache {
+    cacheable: boolean;
+    maxAge?: number;
+    body?: string;
+    update(responseCallback: Function, errorCallback: Function): void;
+  }
   
   interface APIRequest {
     method?: HTTPMethods;
     headers?: RequesHeaders;
     body?: string;
     cors?: RequestModes;
-  }
-  
-  interface ResponseCache {
-    cacheable: boolean;
-    maxAge?: number;
-    body?: string;
-    update(responseCallback: Function, errorCallback: Function): void;
   }
   
   interface NetworkQuery {
