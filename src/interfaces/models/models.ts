@@ -13,6 +13,12 @@ enum HTTPMethods {
     mqtt = 'mqtt',
   }
   
+enum RequestModes {
+  sameOrigin = 'same-origin',
+  noCors = 'no-cors',
+  cors = 'cors',
+}
+
   interface EndPoint {
     protocol: Protocols;
     addr: string;
@@ -28,36 +34,43 @@ enum HTTPMethods {
     method?: HTTPMethods;
     headers?: RequesHeaders;
     body?: string;
+    cors?: RequestModes;
   }
   
   interface ResponseCache {
     cacheable: boolean;
     maxAge?: number;
     body?: string;
-    update(callbacks: APICallbacks): void;
-  }
-  
-  interface APICallbacks {
-    // TODO
+    update(responseCallback: Function, errorCallback: Function): void;
   }
   
   interface NetworkQuery {
     host: EndPoint;
     request: APIRequest;
-    callbacks: APICallbacks;
+    responseCallback: Function;
+    errorCallback: Function;
     cache: ResponseCache;
-    send(): void;
+    set method(method: HTTPMethods);
+    set headers(headers: RequesHeaders);
+    set body(body: string);
+    fetch(): void;
   }
   
+interface NetworkParallelQueries {
+  queries: NetworkQuery[];
+  fetch(): void;
+}
+
   /* Aplication examples:
   
   const MapsAPI = new EndPoint("apis.google.com","/maps/");
   const getMaps = new NetworkQuery(MapsAPI);
-  getMaps.send();
+  getMaps.fetch();
   
   const StoreAPI =  new EndPoint("api.littleshop.com");
-  const postProductRequest = ({method: "POST", body: newProduct, }})
-  const postProduct = new NetworkQuery(MapsAPI,postProductRequest)
-  
+  const postProduct = new NetworkQuery(MapsAPI);
+  postProduct.method='POST';
+  postProduct.body=newProduct;
+
   */
   
